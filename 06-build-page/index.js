@@ -159,7 +159,7 @@ function copyDir(){
 removeAssets();
 deleteFold()
 copyDir();
-setTimeout(copyDir, 200)
+
 
 function removeAssets(){
   fs.readdir(pathAssets, readdirRemove, {withFileTypes: true});
