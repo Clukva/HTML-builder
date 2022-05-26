@@ -1,7 +1,8 @@
 const path = require('path');
 const fs = require('fs');
-let pathP = path.resolve('05-merge-styles', 'styles');
-let pathPath = path.resolve('05-merge-styles', 'project-dist');
+
+let pathP = path.join(__dirname, 'styles');
+let pathPath = path.join(__dirname, 'project-dist');
 
 fs.readdir(pathP, readdirCallBack, {withFileTypes: true});
 
