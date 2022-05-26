@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const pathText = path.resolve('01-read-file', 'text.txt');
+
+const pathText = path.join(__dirname, 'text.txt');
 
 const stream = new fs.ReadStream(pathText, {encoding: 'utf-8'});
 
