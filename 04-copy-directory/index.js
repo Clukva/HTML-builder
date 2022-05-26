@@ -1,7 +1,8 @@
 const path = require('path');
 const fs = require('fs');
-let pathP = path.resolve('04-copy-directory', 'files');
-let pathPath = path.resolve('04-copy-directory', 'files-copy');
+
+let pathP = path.join(__dirname, 'files');
+let pathPath = path.join(__dirname, 'files-copy');
 
 
 
