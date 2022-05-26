@@ -22,13 +22,13 @@ let pathAssets = path.join(__dirname, 'project-dist', 'assets');
 // вставка html
 //innerHtml();
 function innerHtml(){
-  let indexHtmlRead = fs.createReadStream(pathP+'\\template.html', 'utf8');
-  let indexHtmlWrite = fs.createWriteStream(pathProject+'\\index.html');
+  let indexHtmlRead = fs.createReadStream(pathP+'\/template.html', 'utf8');
+  let indexHtmlWrite = fs.createWriteStream(pathProject+'\/index.html');
   indexHtmlRead.pipe(indexHtmlWrite);
   
-  fs.readFile(pathP+'\\template.html', 'utf8', function(error, data){
+  fs.readFile(pathP+'\/template.html', 'utf8', function(error, data){
   
-      fs.readdir(pathP+'\\components', 'utf8', function(error, dataFooter){
+      fs.readdir(pathP+'\/components', 'utf8', function(error, dataFooter){
   
         if(error) ;
         dataFooter.forEach( elem =>{
@@ -37,10 +37,10 @@ function innerHtml(){
             if(path.extname(elem) !== '.html') return;
         
             let fff = elem.slice(0, -5).toString()
-          fs.readFile(pathP+`\\components\\${fff}.html`, 'utf8', function(error, dataFoo){
+          fs.readFile(pathP+`\/components\/${fff}.html`, 'utf8', function(error, dataFoo){
             if(error){};
             data = data.replace(`{{${fff}}}`, dataFoo);
-            fs.writeFile(pathProject+'\\index.html', data, 'utf8', (error) =>{
+            fs.writeFile(pathProject+'\/index.html', data, 'utf8', (error) =>{
               if(error) throw error;
             })
           })
@@ -65,15 +65,15 @@ function readdirCallBack(error, files){
         fileHandler();
 
            files.forEach(elem =>{
-            fs.stat((pathStyle+'\\'+`${elem}`), (error, stats) => {
+            fs.stat((pathStyle+'\/'+`${elem}`), (error, stats) => {
                 if(error) throw error;
                 if(!stats.isFile() || path.extname(elem) !== '.css') return;
                           
-              fs.readFile(pathStyle+'\\'+`${elem}`, 'utf-8', (error, data)=>{
+              fs.readFile(pathStyle+'\/'+`${elem}`, 'utf-8', (error, data)=>{
                   if(error){
                       throw error;
                   } else{
-                    fs.appendFile(pathProject+ '\\style.css', data+'\n', function (err) {
+                    fs.appendFile(pathProject+ '\/style.css', data+'\n', function (err) {
                         if (err) throw err;
                     });
                  }
@@ -83,7 +83,7 @@ function readdirCallBack(error, files){
     }
   }
 function fileHandler(){
-    fs.open( pathProject + '\\'+'style.css', 'w', (err) => {
+    fs.open( pathProject + '\/'+'style.css', 'w', (err) => {
         if(err){ 
             throw err;
         }
@@ -91,7 +91,7 @@ function fileHandler(){
 }
 
 function deleteBundle(){
-    fs.unlink(  pathProject + '\\'+'style.css', err =>{
+    fs.unlink(  pathProject + '\/'+'style.css', err =>{
             if(err) console.log('add file');
       })
 }
@@ -108,7 +108,7 @@ fs.mkdir( pathAssets ,{recursive: true}, e =>{
 
 function copyDir(){
   
-  fs.readdir(pathP +"\\assets", readdirCallBack, {withFileTypes: true});
+  fs.readdir(pathP +"\/assets", readdirCallBack, {withFileTypes: true});
   
   function readdirCallBack(error, files){
    // console.log(files)
@@ -116,24 +116,24 @@ function copyDir(){
           console.log('Error in reading');
       }else{
         files.forEach(elem =>{
-            fs.copyFile(pathP + '\\assets' +`\\${elem}`, pathAssets + `\\${elem}`, err => {
+            fs.copyFile(pathP + '\/assets' +`\/${elem}`, pathAssets + `\/${elem}`, err => {
             if(err) ; 
           }); 
         }) 
 
         files.forEach(elem =>{
 
-          fs.stat((pathP + `\\assets\\${elem}`), (error, stats) => {
+          fs.stat((pathP + `\/assets\/${elem}`), (error, stats) => {
             if(stats.isFile() ) return;
 
-         fs.mkdir( pathAssets + `\\${elem}` ,{recursive: true}, e =>{
+         fs.mkdir( pathAssets + `\/${elem}` ,{recursive: true}, e =>{
           if(e){
               console.error(e);
             } else {
             }
           }); 
 
-          fs.readdir(pathP + `\\assets\\${elem}`, readdirCallBackIn, {withFileTypes: true});
+          fs.readdir(pathP + `\/assets\/${elem}`, readdirCallBackIn, {withFileTypes: true});
           function readdirCallBackIn(error, files){
             if(error){
                 console.log('Error inn reading');
@@ -141,10 +141,10 @@ function copyDir(){
               let pathPin = path.resolve('06-build-page', 'assets', `${elem}`);
               let pathPout = path.resolve('06-build-page', 'project-dist', 'assets', `${elem}`);
               files.forEach(elem =>{
-                fs.unlink(pathPout + '\\' + `${elem}` , err => {
+                fs.unlink(pathPout + '\/' + `${elem}` , err => {
                 if(err) ;
               });
-                fs.copyFile(pathPin +`\\${elem}`, pathPout + '\\' + `${elem}`, err => {
+                fs.copyFile(pathPin +`\/${elem}`, pathPout + '\/' + `${elem}`, err => {
                   if(err) throw err; 
                 }); 
               }) 
@@ -169,18 +169,18 @@ function removeAssets(){
       throw err;
     }else{
       files.forEach(elem =>{
-        fs.stat((pathAssets+`\\${elem}`), (error, stats) => {
+        fs.stat((pathAssets+`\/${elem}`), (error, stats) => {
           if(error) throw error;
           if(stats.isFile() ){
-            fs.unlink(pathAssets+`\\${elem}`, err => {
+            fs.unlink(pathAssets+`\/${elem}`, err => {
               if(err) throw err; 
            });
           }else{
-            fs.readdir(pathAssets+`\\${elem}`, {withFileTypes: true}, (err, files) =>{
+            fs.readdir(pathAssets+`\/${elem}`, {withFileTypes: true}, (err, files) =>{
               if(err) throw err;
               else{
                 files.forEach(el =>{
-                    fs.unlink(pathAssets+`\\${elem}`+`\\${el.name}`, err => {
+                    fs.unlink(pathAssets+`\/${elem}`+`\/${el.name}`, err => {
                       
                     if(err) ; 
                  });  
@@ -199,10 +199,10 @@ function removeAssets(){
     if(err){};
     files.forEach( elem =>{
 
-     fs.stat((pathAssets+`\\${elem.name}`), (error, stats) => {
+     fs.stat((pathAssets+`\/${elem.name}`), (error, stats) => {
        if(error){};
         try {
-          fs.rmdir(pathAssets+`\\${elem.name}`, err => {
+          fs.rmdir(pathAssets+`\/${elem.name}`, err => {
            if(err){} ; 
         });
               } catch (err) {
