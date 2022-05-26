@@ -14,7 +14,7 @@ function copyDir(){
             console.log('Error in reading');
         } else {
             files.forEach(el => {
-                fs.unlink( pathPath +'\\'+ `${el}`, err => {
+                fs.unlink( pathPath +'\/'+ `${el}`, err => {
                     if(err) throw err;
                 })
             })
@@ -36,7 +36,7 @@ function copyDir(){
         });
         
         files.forEach(elem =>{
-            fs.copyFile(pathP + '\\' +`${elem}`, pathPath + '\\' + `${elem}`, err => {
+            fs.copyFile(pathP + '\/' +`${elem}`, pathPath + '\/' + `${elem}`, err => {
                 if(err) throw err;
                 console.log('Файл успешно скопирован');
             });
