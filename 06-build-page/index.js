@@ -3,10 +3,11 @@ const fs = require('fs');
 const fsProm = require('fs/promises');
 const { RSA_NO_PADDING } = require('constants');
 const { versions } = require('process');
-let pathP = path.resolve('06-build-page');
-let pathStyle = path.resolve('06-build-page', 'styles');
-let pathProject = path.resolve('06-build-page', 'project-dist');
-let pathAssets = path.resolve('06-build-page', 'project-dist', 'assets');
+
+let pathP = path.join(__dirname);
+let pathStyle = path.join(__dirname, 'styles');
+let pathProject = path.join(__dirname, 'project-dist');
+let pathAssets = path.join(__dirname, 'project-dist', 'assets');
 
 
 // папка
