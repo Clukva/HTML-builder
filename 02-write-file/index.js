@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const pathText = path.resolve('02-write-file', 'text.txt');
+const pathText = path.join(__dirname, 'text.txt');
 
 function fileHandler(){
     fs.open(pathText, 'w',(err) => {
