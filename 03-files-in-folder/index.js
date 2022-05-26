@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const fsProm = require('fs/promises');
 
-let pathP = path.resolve('03-files-in-folder', 'secret-folder');
+let pathP = path.join(__dirname, 'secret-folder');
 
 
  fs.readdir(pathP, readdirCallBack, {withFileTypes: true});
